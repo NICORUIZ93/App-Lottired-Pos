@@ -1,0 +1,34 @@
+div.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+form {
+  word-wrap: break-word;
+}
+
+.number-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.number-item {
+  margin: 5px;
+  font-size: 50px;
+  opacity: 0;
+  animation: number-animation 0.5s ease-in-out forwards;
+}
+
+@keyframes number-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

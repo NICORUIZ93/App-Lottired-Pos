@@ -1,13 +1,136 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>sales</ion-title>
+    <ion-title>Mis ventas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">sales</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="form-container">
+  <div [ngSwitch]="currentStep" class="container">
+    <ion-spinner *ngIf="loading"></ion-spinner>
+    <div *ngSwitchCase="'paso1'">
+      <form [formGroup]="ventaForm">
+        <ion-input
+          type="text"
+          fill="solid"
+          label="Número de Ticket"
+          labelPlacement="floating"
+          formControlName="numeroTicket"
+          required
+          errorText="Este campo es obligatorio."
+          helperText="Ingresa el número de ticket"
+        ></ion-input>
+        <ion-input
+          type="text"
+          fill="solid"
+          label="Fecha de Venta"
+          labelPlacement="floating"
+          formControlName="fechaVenta"
+          required
+          errorText="Este campo es obligatorio."
+          helperText="Ingresa la fecha de venta"
+        ></ion-input>
+        <ion-input
+          type="number"
+          fill="solid"
+          label="Monto"
+          labelPlacement="floating"
+          formControlName="monto"
+          required
+          min="0"
+          errorText="Este campo es obligatorio y debe ser un número mayor o igual a 0."
+          helperText="Ingresa el monto"
+        ></ion-input>
+        <div class="ion-text-center">
+          <ion-button (click)="goToStep('paso2')" [disabled]="validarPaso1()">
+            Siguiente
+          </ion-button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'paso2'">
+      <form [formGroup]="ventaForm">
+        <div class="lottery-numbers ion-text-center">
+          <div class="number-container">
+            <div
+              *ngFor="let number of randomNumbers; let i = index"
+              class="number-item"
+              [style.animation-delay]="i * 0.2 + 's'"
+            >
+              {{ number }}
+            </div>
+          </div>
+          <ion-button
+            (click)="generateRandomNumbers()"
+            id="numeroLoteria"
+            [disabled]="ventaForm.pending"
+          >
+            Generar números
+          </ion-button>
+        </div>
+        <div class="button-group">
+          <ion-button (click)="goToStep('paso1')" class="button-previous">
+            Atrás
+          </ion-button>
+          <ion-button
+            (click)="goToStep('paso3')"
+            [disabled]="validarPaso2()"
+            class="button-next"
+          >
+            Siguiente
+          </ion-button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'paso3'">
+      <form [formGroup]="ventaForm" (ngSubmit)="completarCompra()">
+        <ion-input
+          type="text"
+          fill="solid"
+          label="Nombre del Comprador"
+          labelPlacement="floating"
+          formControlName="nombreComprador"
+          required
+          errorText="Este campo es obligatorio."
+          helperText="Ingresa el nombre del comprador"
+        ></ion-input>
+        <ion-input
+          type="number"
+          fill="solid"
+          label="Cédula del Comprador"
+          labelPlacement="floating"
+          formControlName="cedulaComprador"
+          required
+          errorText="Este campo es obligatorio y debe ser un número."
+          helperText="Ingresa la cédula del comprador"
+        ></ion-input>
+        <ion-input
+          type="tel"
+          fill="solid"
+          label="Teléfono del Comprador"
+          labelPlacement="floating"
+          formControlName="telefonoComprador"
+          helperText="Ingresa el teléfono del comprador"
+          required
+        ></ion-input>
+        <div class="ion-text-center">
+          <ion-button
+            (click)="goToStep('paso2')"
+            shape="round"
+            class="button-previous"
+          >
+            Atrás
+          </ion-button>
+          <ion-button
+            shape="round"
+            type="submit"
+            [disabled]="ventaForm.invalid"
+          >
+            Completar compra
+          </ion-button>
+        </div>
+      </form>
+    </div>
+  </div>
 </ion-content>
