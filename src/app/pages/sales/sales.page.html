@@ -41,7 +41,12 @@
           helperText="Ingresa el monto"
         ></ion-input>
         <div class="ion-text-center">
-          <ion-button (click)="goToStep('paso2')" [disabled]="validarPaso1()">
+          <ion-button
+            fill="outline"
+            color="success"
+            (click)="goToStep('paso2')"
+            [disabled]="validarPaso1()"
+          >
             Siguiente
           </ion-button>
         </div>
@@ -49,30 +54,36 @@
     </div>
 
     <div *ngSwitchCase="'paso2'">
-      <form [formGroup]="ventaForm">
-        <div class="lottery-numbers ion-text-center">
-          <div class="number-container">
-            <div
-              *ngFor="let number of randomNumbers; let i = index"
-              class="number-item"
-              [style.animation-delay]="i * 0.2 + 's'"
-            >
+      <form [formGroup]="ventaForm" class="ion-text-center ion-margin">
+        <div class="number-container ion-text-center">
+          <ng-container *ngFor="let number of randomNumbers; let i = index">
+            <div class="number-item" [style.animation-delay]="i * 0.2 + 's'">
               {{ number }}
             </div>
-          </div>
-          <ion-button
-            (click)="generateRandomNumbers()"
-            id="numeroLoteria"
-            [disabled]="ventaForm.pending"
-          >
-            Generar números
-          </ion-button>
+          </ng-container>
         </div>
-        <div class="button-group">
-          <ion-button (click)="goToStep('paso1')" class="button-previous">
-            Atrás
+
+        <ion-button
+          size="large"
+          fill="clear"
+          (click)="generateRandomNumbers()"
+          id="numeroLoteria"
+          [disabled]="ventaForm.pending"
+        >
+          <ion-icon size="large" name="keypad"></ion-icon>
+        </ion-button>
+
+        <div class="ion-text-center">
+          <ion-button
+            fill="clear"
+            (click)="goToStep('paso1')"
+            class="button-previous"
+          >
+            <ion-icon name="arrow-back"></ion-icon>
           </ion-button>
           <ion-button
+            fill="outline"
+            color="success"
             (click)="goToStep('paso3')"
             [disabled]="validarPaso2()"
             class="button-next"
@@ -114,8 +125,9 @@
           helperText="Ingresa el teléfono del comprador"
           required
         ></ion-input>
-        <div class="ion-text-center">
+        <div class="ion-text-center ion-margin">
           <ion-button
+            fill="clear"
             (click)="goToStep('paso2')"
             shape="round"
             class="button-previous"
@@ -125,6 +137,8 @@
           <ion-button
             shape="round"
             type="submit"
+            color="success"
+            fill="outline"
             [disabled]="ventaForm.invalid"
           >
             Completar compra

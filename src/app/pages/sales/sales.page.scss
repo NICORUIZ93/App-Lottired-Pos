@@ -1,13 +1,13 @@
-div.container {
+.container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
 }
 
 form {
-  word-wrap: break-word;
+  width: 250px;
 }
 
 .number-container {
@@ -15,9 +15,11 @@ form {
   justify-content: center;
   align-items: center;
 }
+
 .number-item {
-  margin: 5px;
+  display: inline-block;
   font-size: 50px;
+  margin: 5px;
   opacity: 0;
   animation: number-animation 0.5s ease-in-out forwards;
 }
