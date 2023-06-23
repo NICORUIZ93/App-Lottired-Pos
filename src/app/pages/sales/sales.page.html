@@ -10,42 +10,42 @@
     <div *ngSwitchCase="'paso1'">
       <form [formGroup]="ventaForm">
         <ion-input
-          type="text"
+          errorText="Este campo es obligatorio."
           fill="solid"
+          formControlName="numeroTicket"
+          helperText="Ingresa el número de ticket"
           label="Número de Ticket"
           labelPlacement="floating"
-          formControlName="numeroTicket"
           required
-          errorText="Este campo es obligatorio."
-          helperText="Ingresa el número de ticket"
+          type="text"
         ></ion-input>
         <ion-input
-          type="text"
+          errorText="Este campo es obligatorio."
           fill="solid"
+          formControlName="fechaVenta"
+          helperText="Ingresa la fecha de venta"
           label="Fecha de Venta"
           labelPlacement="floating"
-          formControlName="fechaVenta"
           required
-          errorText="Este campo es obligatorio."
-          helperText="Ingresa la fecha de venta"
+          type="text"
         ></ion-input>
         <ion-input
-          type="number"
+          errorText="Este campo es obligatorio y debe ser un número mayor o igual a 0."
           fill="solid"
+          formControlName="monto"
+          helperText="Ingresa el monto"
           label="Monto"
           labelPlacement="floating"
-          formControlName="monto"
-          required
           min="0"
-          errorText="Este campo es obligatorio y debe ser un número mayor o igual a 0."
-          helperText="Ingresa el monto"
+          required
+          type="number"
         ></ion-input>
         <div class="ion-text-center">
           <ion-button
-            fill="outline"
-            color="success"
             (click)="goToStep('paso2')"
             [disabled]="validarPaso1()"
+            color="success"
+            fill="outline"
           >
             Siguiente
           </ion-button>
@@ -57,36 +57,36 @@
       <form [formGroup]="ventaForm" class="ion-text-center ion-margin">
         <div class="number-container ion-text-center">
           <ng-container *ngFor="let number of randomNumbers; let i = index">
-            <div class="number-item" [style.animation-delay]="i * 0.2 + 's'">
+            <div [style.animation-delay]="i * 0.2 + 's'" class="number-item">
               {{ number }}
             </div>
           </ng-container>
         </div>
 
         <ion-button
-          size="large"
-          fill="clear"
           (click)="generateRandomNumbers()"
-          id="numeroLoteria"
           [disabled]="ventaForm.pending"
+          fill="clear"
+          id="numeroLoteria"
+          size="large"
         >
-          <ion-icon size="large" name="keypad"></ion-icon>
+          <ion-icon name="keypad" size="large"></ion-icon>
         </ion-button>
 
         <div class="ion-text-center">
           <ion-button
-            fill="clear"
             (click)="goToStep('paso1')"
             class="button-previous"
+            fill="clear"
           >
             <ion-icon name="arrow-back"></ion-icon>
           </ion-button>
           <ion-button
-            fill="outline"
-            color="success"
             (click)="goToStep('paso3')"
             [disabled]="validarPaso2()"
             class="button-next"
+            color="success"
+            fill="outline"
           >
             Siguiente
           </ion-button>
@@ -95,62 +95,62 @@
     </div>
 
     <div *ngSwitchCase="'paso3'">
-      <form [formGroup]="ventaForm" (ngSubmit)="completarCompra()">
+      <form (ngSubmit)="completarCompra()" [formGroup]="ventaForm">
         <ion-input
-          type="text"
+          errorText="Este campo es obligatorio."
           fill="solid"
+          formControlName="nombreComprador"
+          helperText="Ingresa el nombre del comprador"
           label="Nombre del Comprador"
           labelPlacement="floating"
-          formControlName="nombreComprador"
           required
-          errorText="Este campo es obligatorio."
-          helperText="Ingresa el nombre del comprador"
+          type="text"
         ></ion-input>
         <ion-input
-          type="number"
+          errorText="Este campo es obligatorio y debe ser un número."
           fill="solid"
+          formControlName="cedulaComprador"
+          helperText="Ingresa la cédula del comprador"
           label="Cédula del Comprador"
           labelPlacement="floating"
-          formControlName="cedulaComprador"
           required
-          errorText="Este campo es obligatorio y debe ser un número."
-          helperText="Ingresa la cédula del comprador"
+          type="number"
         ></ion-input>
         <ion-input
-          type="tel"
           fill="solid"
-          label="Teléfono del Comprador"
-          labelPlacement="floating"
           formControlName="telefonoComprador"
           helperText="Ingresa el teléfono del comprador"
+          label="Teléfono del Comprador"
+          labelPlacement="floating"
           required
+          type="tel"
         ></ion-input>
         <div class="ion-text-center ion-margin">
           <ion-button
-            fill="clear"
             (click)="goToStep('paso2')"
-            shape="round"
             class="button-previous"
+            fill="clear"
+            shape="round"
           >
             Atrás
           </ion-button>
           <ion-button
+            [disabled]="ventaForm.invalid"
+            color="success"
+            fill="outline"
             id="successBay"
             shape="round"
             type="submit"
-            color="success"
-            fill="outline"
-            [disabled]="ventaForm.invalid"
           >
             Completar compra
           </ion-button>
 
           <ion-modal
             #modal
-            trigger="successBay"
-            [isOpen]="isModal"
             [backdropDismiss]="true"
+            [isOpen]="isModal"
             [presentingElement]="presentingElement"
+            trigger="successBay"
           >
             <ng-template>
               <ion-header>
@@ -194,10 +194,10 @@
           </ion-modal>
 
           <ion-toast
-            [isOpen]="isToast"
-            message="Compra exitosa, Gracias vuelva pronto!!!"
             [duration]="5000"
+            [isOpen]="isToast"
             icon="checkmark-circle"
+            message="Compra exitosa, Gracias vuelva pronto!!!"
           ></ion-toast>
         </div>
       </form>

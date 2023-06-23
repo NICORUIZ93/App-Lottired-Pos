@@ -6,21 +6,21 @@
           <ion-list-header>Lottired</ion-list-header>
 
           <ion-menu-toggle
-            auto-hide="false"
             *ngFor="let p of appPages; let i = index"
+            auto-hide="false"
           >
             <ion-item
-              routerDirection="root"
               [routerLink]="[p.url]"
-              lines="none"
               detail="false"
+              lines="none"
+              routerDirection="root"
               routerLinkActive="selected"
             >
               <ion-icon
-                aria-hidden="true"
-                slot="start"
                 [ios]="p.icon + '-outline'"
                 [md]="p.icon + '-sharp'"
+                aria-hidden="true"
+                slot="start"
               ></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>

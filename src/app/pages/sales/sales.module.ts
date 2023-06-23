@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { SalesPageRoutingModule } from './sales-routing.module';
+import {SalesPageRoutingModule} from './sales-routing.module';
 
-import { SalesPage } from './sales.page';
+import {SalesPage} from './sales.page';
 
 @NgModule({
   imports: [
@@ -18,4 +18,5 @@ import { SalesPage } from './sales.page';
   ],
   declarations: [SalesPage]
 })
-export class SalesPageModule {}
+export class SalesPageModule {
+}

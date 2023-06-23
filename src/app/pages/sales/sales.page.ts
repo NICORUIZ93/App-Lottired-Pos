@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActionSheetController } from '@ionic/angular';
-import { NavController } from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActionSheetController, NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-sales',
@@ -21,7 +20,8 @@ export class SalesPage implements OnInit {
     private fb: FormBuilder,
     private actionSheetCtrl: ActionSheetController,
     private navCtrl: NavController
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.initForm();
@@ -51,13 +51,11 @@ export class SalesPage implements OnInit {
   validarPaso1() {
     return this.ventaForm.get('numeroTicket').invalid ||
       this.ventaForm.get('fechaVenta').invalid ||
-      this.ventaForm.get('monto').invalid
-      ? true
-      : false;
+      this.ventaForm.get('monto').invalid;
   }
 
   validarPaso2() {
-    return this.ventaForm.get('numeroLoteria').invalid ? true : false;
+    return this.ventaForm.get('numeroLoteria').invalid;
   }
 
   completarCompra(): void {
@@ -86,7 +84,7 @@ export class SalesPage implements OnInit {
 
   generateRandomNumbers() {
     this.randomNumbers = Array.from(
-      { length: 4 },
+      {length: 4},
       () => +Math.floor(Math.random() * 10)
     );
     this.ventaForm.get('numeroLoteria').setValue(this.randomNumbers.join(''));
@@ -111,9 +109,9 @@ export class SalesPage implements OnInit {
       ],
     });
 
-    actionSheet.present();
+    await actionSheet.present();
 
-    const { role } = await actionSheet.onWillDismiss();
+    const {role} = await actionSheet.onWillDismiss();
 
     return role === 'confirm';
   };

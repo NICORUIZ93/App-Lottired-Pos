@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-news',
@@ -23,5 +23,7 @@ export class NewsPage {
       titulo: 'Titulo 1',
     },
   ];
-  constructor() {}
+
+  constructor() {
+  }
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {Component} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-configurations',
@@ -10,10 +10,12 @@ export class ConfigurationsPage {
 
   private theme = new BehaviorSubject('light');
   currentTheme = this.theme.asObservable();
-  constructor() {}
+
+  constructor() {
+  }
 
   toggleTheme() {
-    
+
     this.theme.next(this.theme.value === 'light' ? 'dark' : 'light');
   }
 }

@@ -6,36 +6,36 @@
 
 <ion-content>
   <div class="container ion-text-center">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
       <ion-input
-        type="email"
-        formControlName="email"
-        required
-        placeholder="Ingresa tu correo electrónico"
+        errorText="Por favor, ingresa un correo electrónico válido."
         fill="solid"
+        formControlName="email"
+        helperText="Ingresa un correo electrónico válido"
         label="Correo electrónico"
         labelPlacement="floating"
-        helperText="Ingresa un correo electrónico válido"
-        errorText="Por favor, ingresa un correo electrónico válido."
+        placeholder="Ingresa tu correo electrónico"
+        required
+        type="email"
       ></ion-input>
 
       <ion-input
-        type="password"
-        formControlName="password"
-        required
-        placeholder="Ingresa tu contraseña"
+        errorText="Por favor, ingresa una contraseña válida."
         fill="solid"
+        formControlName="password"
+        helperText="Ingresa una contraseña válida"
         label="Contraseña"
         labelPlacement="floating"
-        helperText="Ingresa una contraseña válida"
-        errorText="Por favor, ingresa una contraseña válida."
+        placeholder="Ingresa tu contraseña"
+        required
+        type="password"
       ></ion-input>
 
       <ion-button
-        fill="outline"
-        color="success"
-        type="submit"
         [disabled]="loginForm.invalid"
+        color="success"
+        fill="outline"
+        type="submit"
       >
         Iniciar sesión
       </ion-button>

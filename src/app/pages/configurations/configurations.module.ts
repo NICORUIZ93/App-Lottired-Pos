@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { ConfigurationsPageRoutingModule } from './configurations-routing.module';
+import {ConfigurationsPageRoutingModule} from './configurations-routing.module';
 
-import { ConfigurationsPage } from './configurations.page';
+import {ConfigurationsPage} from './configurations.page';
 
 @NgModule({
   imports: [
@@ -17,4 +17,5 @@ import { ConfigurationsPage } from './configurations.page';
   ],
   declarations: [ConfigurationsPage]
 })
-export class ConfigurationsPageModule {}
+export class ConfigurationsPageModule {
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-my-sales',
@@ -29,5 +29,7 @@ export class MySalesPage {
       vendedor: 'Pedro',
     },
   ];
-  constructor() {}
+
+  constructor() {
+  }
 }
