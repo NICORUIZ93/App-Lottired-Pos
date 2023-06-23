@@ -69,6 +69,7 @@ export class SalesPage implements OnInit {
           this.ventaForm.reset();
           this.navCtrl.pop();
           this.navCtrl.navigateForward('/home');
+          navigator.vibrate(500);
         }, 1000);
 
         this.isToast = true;
