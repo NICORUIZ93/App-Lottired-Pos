@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sales',
@@ -12,8 +13,15 @@ export class SalesPage implements OnInit {
   loading = false;
   currentStep: string = 'paso1';
   randomNumbers: number[] = [];
+  presentingElement = undefined;
+  isToast: boolean = false;
+  isModal: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private actionSheetCtrl: ActionSheetController
+  ) {}
 
   ngOnInit() {
     this.initForm();
@@ -54,12 +62,24 @@ export class SalesPage implements OnInit {
 
   completarCompra(): void {
     this.loading = true;
-    setTimeout(() => {
-      console.log(this.ventaForm.value);
-      this.ventaForm.reset();
-      this.router.navigate(['/home']);
-      this.loading = false;
-    }, 1000);
+    this.isModal = true;
+    this.canDismiss().then((data) => {
+      if (data) {
+        setTimeout(() => {
+          // this.router.navigate(['/login']);
+          this.isToast = true;
+          console.log(this.ventaForm.value);
+          this.loading = false;
+          this.isModal = false;
+
+          this.ventaForm.reset();
+        }, 1000);
+      } else {
+        this.loading = false;
+        this.isModal = false;
+        this.isToast = false;
+      }
+    });
   }
 
   generateRandomNumbers() {
@@ -73,4 +93,26 @@ export class SalesPage implements OnInit {
   goToStep(step: string) {
     this.currentStep = step;
   }
+
+  canDismiss = async () => {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'La información es correcta?',
+      buttons: [
+        {
+          text: 'Si',
+          role: 'confirm',
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    actionSheet.present();
+
+    const { role } = await actionSheet.onWillDismiss();
+
+    return role === 'confirm';
+  };
 }

@@ -135,6 +135,7 @@
             Atrás
           </ion-button>
           <ion-button
+            id="successBay"
             shape="round"
             type="submit"
             color="success"
@@ -143,6 +144,61 @@
           >
             Completar compra
           </ion-button>
+
+          <ion-modal
+            #modal
+            trigger="successBay"
+            [isOpen]="isModal"
+            [backdropDismiss]="true"
+            [presentingElement]="presentingElement"
+          >
+            <ng-template>
+              <ion-header>
+                <ion-toolbar>
+                  <ion-title>Modal</ion-title>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="modal.dismiss()">Close</ion-button>
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-header>
+              <ion-content class="ion-padding">
+                <p>
+                  <strong>Number of Ticket:</strong> {{
+                  ventaForm.get('numeroTicket').value }}
+                </p>
+                <p>
+                  <strong>Fecha de Venta:</strong> {{
+                  ventaForm.get('fechaVenta').value }}
+                </p>
+                <p>
+                  <strong>Monto:</strong> {{ ventaForm.get('monto').value }}
+                </p>
+                <p>
+                  <strong>Nombre del Comprador:</strong> {{
+                  ventaForm.get('nombreComprador').value }}
+                </p>
+                <p>
+                  <strong>Cédula del Comprador:</strong> {{
+                  ventaForm.get('cedulaComprador').value }}
+                </p>
+                <p>
+                  <strong>Teléfono del Comprador:</strong> {{
+                  ventaForm.get('telefonoComprador').value }}
+                </p>
+                <p>
+                  <strong>Número de Lotería:</strong> {{
+                  ventaForm.get('numeroLoteria').value }}
+                </p>
+              </ion-content>
+            </ng-template>
+          </ion-modal>
+
+          <ion-toast
+            [isOpen]="isToast"
+            message="Compra exitosa, Gracias vuelva pronto!!!"
+            [duration]="5000"
+            icon="checkmark-circle"
+          ></ion-toast>
         </div>
       </form>
     </div>

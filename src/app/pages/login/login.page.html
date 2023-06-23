@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
+  <div class="container ion-text-center">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <ion-input
         type="email"
@@ -31,7 +31,12 @@
         errorText="Por favor, ingresa una contraseña válida."
       ></ion-input>
 
-      <ion-button type="submit" [disabled]="loginForm.invalid">
+      <ion-button
+        fill="outline"
+        color="success"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
         Iniciar sesión
       </ion-button>
     </form>
