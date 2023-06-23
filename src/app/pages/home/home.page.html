@@ -1,9 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <ion-button id="open-toast">Open Toast</ion-button>
-  <ion-toast
-    trigger="open-toast"
-    message="Hello World!"
-    [duration]="3000"
-    icon="checkmark-circle"
-  ></ion-toast>
+  <div class="container">
+    <ion-datetime-button
+      datetime="datetime"
+      hourCycle="h12"
+    ></ion-datetime-button>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+    <ion-button (click)="pruebraVibracion()">Vibración</ion-button>
+  </div>
 </ion-content>

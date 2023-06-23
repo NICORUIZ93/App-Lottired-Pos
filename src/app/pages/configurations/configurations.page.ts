@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-configurations',
   templateUrl: './configurations.page.html',
   styleUrls: ['./configurations.page.scss'],
 })
-export class ConfigurationsPage implements OnInit {
+export class ConfigurationsPage {
 
-  constructor() { }
+  private theme = new BehaviorSubject('light');
+  currentTheme = this.theme.asObservable();
+  constructor() {}
 
-  ngOnInit() {
+  toggleTheme() {
+    
+    this.theme.next(this.theme.value === 'light' ? 'dark' : 'light');
   }
-
 }

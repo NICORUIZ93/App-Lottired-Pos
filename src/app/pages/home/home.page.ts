@@ -13,4 +13,8 @@ export class HomePage {
   setOpen(isOpen: boolean) {
     this.isToastOpen = isOpen;
   }
+
+  pruebraVibracion() {
+    navigator.vibrate(500);
+  }
 }

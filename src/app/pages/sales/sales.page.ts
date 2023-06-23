@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sales',
@@ -19,8 +19,8 @@ export class SalesPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {
@@ -66,14 +66,15 @@ export class SalesPage implements OnInit {
     this.canDismiss().then((data) => {
       if (data) {
         setTimeout(() => {
-          // this.router.navigate(['/login']);
-          this.isToast = true;
-          console.log(this.ventaForm.value);
-          this.loading = false;
-          this.isModal = false;
-
           this.ventaForm.reset();
+          this.navCtrl.pop();
+          this.navCtrl.navigateForward('/home');
         }, 1000);
+
+        this.isToast = true;
+        this.loading = false;
+        this.isModal = false;
+        console.log(this.ventaForm.value);
       } else {
         this.loading = false;
         this.isModal = false;
