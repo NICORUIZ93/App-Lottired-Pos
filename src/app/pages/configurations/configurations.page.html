@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Configuraciones
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Ajustes
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Idioma</ion-label>
+        <ion-select>
+          <ion-select-option value="es">Español</ion-select-option>
+          <ion-select-option value="en">Inglés</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Notificaciones</ion-label>
+        <ion-toggle></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Privacidad</ion-label>
+        <ion-toggle></ion-toggle>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Cuenta
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Cambiar contraseña</ion-label>
+        <ion-button fill="clear">Cambiar</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>Actualizar información</ion-label>
+        <ion-button fill="clear">Actualizar</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cerrar sesión</ion-label>
+        <ion-button fill="clear">Cerrar</ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Ayuda
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Preguntas frecuentes</ion-label>
+        <ion-button fill="clear">Ver</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tutoriales</ion-label>
+        <ion-button fill="clear">Ver</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>Documentación</ion-label>
+        <ion-button fill="clear">Ver</ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button (click)="toggleTheme()" expand="block">Cambiar tema</ion-button>
+</ion-content>

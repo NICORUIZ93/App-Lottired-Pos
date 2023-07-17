@@ -1,0 +1,206 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mis ventas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="form-container">
+  <div [ngSwitch]="currentStep" class="container">
+    <ion-spinner *ngIf="loading"></ion-spinner>
+    <div *ngSwitchCase="'paso1'">
+      <form [formGroup]="ventaForm">
+        <ion-input
+          errorText="Este campo es obligatorio."
+          fill="solid"
+          formControlName="numeroTicket"
+          helperText="Ingresa el número de ticket"
+          label="Número de Ticket"
+          labelPlacement="floating"
+          required
+          type="text"
+        ></ion-input>
+        <ion-input
+          errorText="Este campo es obligatorio."
+          fill="solid"
+          formControlName="fechaVenta"
+          helperText="Ingresa la fecha de venta"
+          label="Fecha de Venta"
+          labelPlacement="floating"
+          required
+          type="text"
+        ></ion-input>
+        <ion-input
+          errorText="Este campo es obligatorio y debe ser un número mayor o igual a 0."
+          fill="solid"
+          formControlName="monto"
+          helperText="Ingresa el monto"
+          label="Monto"
+          labelPlacement="floating"
+          min="0"
+          required
+          type="number"
+        ></ion-input>
+        <div class="ion-text-center">
+          <ion-button
+            (click)="goToStep('paso2')"
+            [disabled]="validarPaso1()"
+            color="success"
+            fill="outline"
+          >
+            Siguiente
+          </ion-button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'paso2'">
+      <form [formGroup]="ventaForm" class="ion-text-center ion-margin">
+        <div class="number-container ion-text-center">
+          <ng-container *ngFor="let number of randomNumbers; let i = index">
+            <div [style.animation-delay]="i * 0.2 + 's'" class="number-item">
+              {{ number }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-button
+          (click)="generateRandomNumbers()"
+          [disabled]="ventaForm.pending"
+          fill="clear"
+          id="numeroLoteria"
+          size="large"
+        >
+          <ion-icon name="keypad" size="large"></ion-icon>
+        </ion-button>
+
+        <div class="ion-text-center">
+          <ion-button
+            (click)="goToStep('paso1')"
+            class="button-previous"
+            fill="clear"
+          >
+            <ion-icon name="arrow-back"></ion-icon>
+          </ion-button>
+          <ion-button
+            (click)="goToStep('paso3')"
+            [disabled]="validarPaso2()"
+            class="button-next"
+            color="success"
+            fill="outline"
+          >
+            Siguiente
+          </ion-button>
+        </div>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'paso3'">
+      <form (ngSubmit)="completarCompra()" [formGroup]="ventaForm">
+        <ion-input
+          errorText="Este campo es obligatorio."
+          fill="solid"
+          formControlName="nombreComprador"
+          helperText="Ingresa el nombre del comprador"
+          label="Nombre del Comprador"
+          labelPlacement="floating"
+          required
+          type="text"
+        ></ion-input>
+        <ion-input
+          errorText="Este campo es obligatorio y debe ser un número."
+          fill="solid"
+          formControlName="cedulaComprador"
+          helperText="Ingresa la cédula del comprador"
+          label="Cédula del Comprador"
+          labelPlacement="floating"
+          required
+          type="number"
+        ></ion-input>
+        <ion-input
+          fill="solid"
+          formControlName="telefonoComprador"
+          helperText="Ingresa el teléfono del comprador"
+          label="Teléfono del Comprador"
+          labelPlacement="floating"
+          required
+          type="tel"
+        ></ion-input>
+        <div class="ion-text-center ion-margin">
+          <ion-button
+            (click)="goToStep('paso2')"
+            class="button-previous"
+            fill="clear"
+            shape="round"
+          >
+            Atrás
+          </ion-button>
+          <ion-button
+            [disabled]="ventaForm.invalid"
+            color="success"
+            fill="outline"
+            id="successBay"
+            shape="round"
+            type="submit"
+          >
+            Completar compra
+          </ion-button>
+
+          <ion-modal
+            #modal
+            [backdropDismiss]="true"
+            [isOpen]="isModal"
+            [presentingElement]="presentingElement"
+            trigger="successBay"
+          >
+            <ng-template>
+              <ion-header>
+                <ion-toolbar>
+                  <ion-title>Modal</ion-title>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="modal.dismiss()">Close</ion-button>
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-header>
+              <ion-content class="ion-padding">
+                <p>
+                  <strong>Number of Ticket:</strong> {{
+                  ventaForm.get('numeroTicket').value }}
+                </p>
+                <p>
+                  <strong>Fecha de Venta:</strong> {{
+                  ventaForm.get('fechaVenta').value }}
+                </p>
+                <p>
+                  <strong>Monto:</strong> {{ ventaForm.get('monto').value }}
+                </p>
+                <p>
+                  <strong>Nombre del Comprador:</strong> {{
+                  ventaForm.get('nombreComprador').value }}
+                </p>
+                <p>
+                  <strong>Cédula del Comprador:</strong> {{
+                  ventaForm.get('cedulaComprador').value }}
+                </p>
+                <p>
+                  <strong>Teléfono del Comprador:</strong> {{
+                  ventaForm.get('telefonoComprador').value }}
+                </p>
+                <p>
+                  <strong>Número de Lotería:</strong> {{
+                  ventaForm.get('numeroLoteria').value }}
+                </p>
+              </ion-content>
+            </ng-template>
+          </ion-modal>
+
+          <ion-toast
+            [duration]="5000"
+            [isOpen]="isToast"
+            icon="checkmark-circle"
+            message="Compra exitosa, Gracias vuelva pronto!!!"
+          ></ion-toast>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

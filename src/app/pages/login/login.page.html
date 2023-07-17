@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Iniciar sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container ion-text-center">
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+      <ion-input
+        fill="solid"
+        formControlName="username"
+        helperText="Ingresa un usuario válido"
+        label="username"
+        labelPlacement="floating"
+        placeholder="Ingresa tu usuario"
+        required
+        type="username"
+      ></ion-input>
+
+      <ion-input
+        fill="solid"
+        formControlName="password"
+        helperText="Ingresa una contraseña válida"
+        label="Contraseña"
+        labelPlacement="floating"
+        placeholder="Ingresa tu contraseña"
+        required
+        type="password"
+      ></ion-input>
+
+      <ion-button
+        [disabled]="loginForm.invalid"
+        color="success"
+        fill="outline"
+        type="submit"
+      >
+        Iniciar sesión
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

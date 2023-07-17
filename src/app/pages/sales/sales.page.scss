@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.number-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number-item {
+  display: inline-block;
+  font-size: 50px;
+  margin: 5px;
+  opacity: 0;
+  animation: number-animation 0.5s ease-in-out forwards;
+}
+
+@keyframes number-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
