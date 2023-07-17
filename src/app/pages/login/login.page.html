@@ -8,17 +8,19 @@
   <div class="container ion-text-center">
     <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
       <ion-input
+        errorText="Por favor, ingresa un correo electrónico válido."
         fill="solid"
-        formControlName="username"
-        helperText="Ingresa un usuario válido"
-        label="username"
+        formControlName="email"
+        helperText="Ingresa un correo electrónico válido"
+        label="Correo electrónico"
         labelPlacement="floating"
-        placeholder="Ingresa tu usuario"
+        placeholder="Ingresa tu correo electrónico"
         required
-        type="username"
+        type="email"
       ></ion-input>
 
       <ion-input
+        errorText="Por favor, ingresa una contraseña válida."
         fill="solid"
         formControlName="password"
         helperText="Ingresa una contraseña válida"
